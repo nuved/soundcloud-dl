@@ -25,7 +25,7 @@ else
 fi
 songs=`echo "$this" | grep 'streamUrl' | tr '"' "\n" | sed 's/\\u0026amp;/\&/' | grep 'http://media.soundcloud.com/stream/' | sed 's/\\\\//'`;
 songcount=`echo "$songs" | wc -l`
-titles=`echo "$this" | grep 'title":"' | tr ',' "\n" | grep 'title' | cut -d '"' -f 4`
+titles=`echo "$this" | grep 'title":"' | grep 'name":"' | tr ',' "\n" | grep -w 'name' | cut -d '"' -f 4`
 
 if [ -z "$songs" ]; then
 	echo "[!] No songs found at $1/tracks?page=$page." && exit
